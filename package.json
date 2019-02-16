@@ -1,6 +1,6 @@
 {
   "name": "semaphore-promise",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Promise based semaphore library",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
