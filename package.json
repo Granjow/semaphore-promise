@@ -1,0 +1,33 @@
+{
+  "name": "semaphore-promise",
+  "version": "1.0.0",
+  "description": "Promise based semaphore library",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepack": "tsc",
+    "build": "tsc",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Granjow/semaphore-promise.git"
+  },
+  "keywords": [
+    "semaphore",
+    "promise",
+    "es6"
+  ],
+  "author": "Simon A. Eugster <simon.eu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Granjow/semaphore-promise/issues"
+  },
+  "homepage": "https://github.com/Granjow/semaphore-promise#readme",
+  "devDependencies": {
+    "@types/jasmine": "^3.3.9",
+    "@types/node": "^11.9.4",
+    "jasmine": "^3.3.1",
+    "jasmine-core": "^3.3.0",
+    "typescript": "^3.3.3"
+  }
+}
