@@ -2,7 +2,12 @@
   "name": "semaphore-promise",
   "version": "1.0.0",
   "description": "Promise based semaphore library",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist/src/**",
+    "README.md"
+  ],
   "scripts": {
     "prepack": "tsc",
     "build": "tsc",
