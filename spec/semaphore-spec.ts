@@ -33,6 +33,41 @@ describe( 'Semaphore basics', () => {
 
 } );
 
+describe( 'Semaphore tryAcquire', () => {
+
+    it( 'can acquire when a semaphore is free', () => {
+        const semaphore = new Semaphore( 1 );
+        expect( () => semaphore.tryAcquire() ).not.toThrow();
+    } );
+
+    it( 'fails when no semaphore is free', () => {
+        const semaphore = new Semaphore( 1 );
+        expect( () => semaphore.tryAcquire() ).not.toThrow();
+        expect( () => semaphore.tryAcquire() ).toThrow();
+    } );
+
+    it( 'can release a semaphore again', () => {
+        const semaphore = new Semaphore( 1 );
+        let releaser : Function;
+        expect( () => releaser = semaphore.tryAcquire() ).not.toThrow();
+        releaser();
+        expect( () => semaphore.tryAcquire() ).not.toThrow();
+        expect( () => semaphore.tryAcquire() ).toThrow();
+    } );
+
+    it( 'can acquire multiple semaphores', () => {
+        const N = 100;
+        const semaphore = new Semaphore( N );
+
+        for ( let i = 0; i < N; i++ ) {
+            expect( () => semaphore.tryAcquire() ).not.toThrow();
+        }
+        expect( () => semaphore.tryAcquire() ).toThrow();
+
+    } );
+
+} );
+
 describe( 'Semaphore performance', () => {
 
     const N = 10000;

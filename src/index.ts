@@ -15,19 +15,27 @@ export class Semaphore {
         this._waitingCallers = [];
     }
 
+    tryAcquire() : () => void {
+        const semaphoreId = Symbol();
+        if ( this.hasAvailableSemaphores ) {
+            this._currentSemaphores.add( semaphoreId );
+            return this.createReleaseFunction( semaphoreId );
+        } else {
+            throw new Error( 'No semaphore available.' );
+        }
+    }
+
     /**
      * Acquire a new semaphore.
      * The returned promise resolves as soon as a semaphore is available and returns a function `release`
      * which has to be used to release the acquired promise.
      * @return {Promise<Function>}
      */
-    acquire() : Promise<Function> {
-        const promise = new Promise<Function>( ( resolve ) => {
+    acquire() : Promise<() => void> {
+        const promise = new Promise<() => void>( ( resolve ) => {
 
             const semaphoreId = Symbol();
-            const release = () => {
-                this.release( semaphoreId );
-            };
+            const release = this.createReleaseFunction( semaphoreId );
 
             this._waitingCallers.push( () => {
                 resolve( release );
@@ -49,13 +57,24 @@ export class Semaphore {
         setTimeout( () => this.treatPendingCallers(), 0 );
     }
 
+    private get hasAvailableSemaphores() : boolean {
+        return this._currentSemaphores.size < this._maxSemaphores;
+    }
+
+    /**
+     * @param id ID of the semaphore which is released when calling this function
+     */
+    private createReleaseFunction( id : Symbol ) : () => void {
+        return () => this.release( id );
+    }
+
 
     /**
      * When a semaphore is requested, the request is added to a queue.
      * The queue is processed by this function.
      */
     private treatPendingCallers() {
-        while ( this._waitingCallers.length > 0 && this._currentSemaphores.size < this._maxSemaphores ) {
+        while ( this._waitingCallers.length > 0 && this.hasAvailableSemaphores ) {
             const semaphoreId = this._waitingCallers.shift()();
             this._currentSemaphores.add( semaphoreId );
         }

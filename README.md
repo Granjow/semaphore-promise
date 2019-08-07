@@ -13,9 +13,7 @@ semaphore.acquire().then( ( release ) => {
 } );
 ```
 
-## semaphore-promise with TypeScript
-
-This library can be used in TypeScript files as well.
+This library can be used in **TypeScript** files as well.
 
 ```typescript
 import { Semaphore } from 'semaphore-promise';
@@ -29,3 +27,19 @@ semaphore.acquire().then( ( release ) => {
 ```
 
 
+## API
+
+### `Semaphore( count : number )`
+
+Creates a new semaphore object with <count> semaphores
+    
+### `acquire() : Promise<() => void>`
+
+Resolves as soon as a semaphore could be acquired.
+
+Returns a *release* function which is needed to `release()` the semaphore again.
+    
+### `tryAcquire() : () => void`
+
+* If a semaphore is available, acquire it and return a *release* function.
+* Else, throw an `Error`.
