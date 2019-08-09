@@ -92,6 +92,6 @@ describe( 'Semaphore performance', () => {
                 } );
             }, 0 );
         }
-    }, 5000 );
+    }, 20000 );
 
 } );
