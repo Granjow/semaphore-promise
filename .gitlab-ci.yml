@@ -1,0 +1,9 @@
+test:
+  stage: test
+  image: node:10
+  tags:
+    - linux
+  script:
+    - npm install
+    - npm run build
+    - npm run test
