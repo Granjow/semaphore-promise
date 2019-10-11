@@ -27,7 +27,7 @@ Creates a new semaphore object with <count> semaphores
     
 ### `acquire() : Promise<() => void>`
 
-Resolves as soon as a semaphore could be acquired.
+Resolves as soon as a semaphore could be acquired. Waiting callers are treated in FIFO order.
 
 Returns a *release* function which is needed to `release()` the semaphore again.
     

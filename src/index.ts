@@ -32,7 +32,7 @@ export class Semaphore {
      * @return {Promise<Function>}
      */
     acquire() : Promise<() => void> {
-        const promise = new Promise<() => void>( ( resolve ) => {
+        const addCallerToWaitlist = ( resolve : Function ) => {
 
             const semaphoreId = Symbol();
             const release = this.createReleaseFunction( semaphoreId );
@@ -41,8 +41,12 @@ export class Semaphore {
                 resolve( release );
                 return semaphoreId;
             } );
-        } );
-        setTimeout( () => this.treatPendingCallers(), 0 );
+        };
+        const treatPendingCallersNow = () => this.treatPendingCallers();
+
+        const promise = new Promise<() => void>( addCallerToWaitlist );
+        setTimeout( treatPendingCallersNow, 0 );
+
         return promise;
     }
 
@@ -54,7 +58,8 @@ export class Semaphore {
         if ( this._currentSemaphores.has( id ) ) {
             this._currentSemaphores.delete( id );
         }
-        setTimeout( () => this.treatPendingCallers(), 0 );
+        const treatPendingCallersAfterRelease = () => this.treatPendingCallers();
+        setTimeout( treatPendingCallersAfterRelease, 0 );
     }
 
     private get hasAvailableSemaphores() : boolean {
@@ -65,7 +70,8 @@ export class Semaphore {
      * @param id ID of the semaphore which is released when calling this function
      */
     private createReleaseFunction( id : Symbol ) : () => void {
-        return () => this.release( id );
+        const releaseMySemaphore = () => this.release( id );
+        return releaseMySemaphore;
     }
 
 
