@@ -4,14 +4,14 @@ describe( 'Semaphore basics', () => {
 
     it( 'can acquire', ( ok ) => {
         const semaphore = new Semaphore( 1 );
-        semaphore.acquire().then( ok );
+        semaphore.acquire().then( () => ok() );
     } );
 
     it( 'can release', ( ok ) => {
         const semaphore = new Semaphore( 1 );
         semaphore.acquire().then( ( releaser ) => {
             releaser();
-            semaphore.acquire().then( ok );
+            semaphore.acquire().then( () => ok() );
         } );
     } );
 
@@ -26,7 +26,7 @@ describe( 'Semaphore basics', () => {
     it( 'runs seconds semaphore after releasing first one', ( ok ) => {
         const semaphore = new Semaphore( 1 );
         semaphore.acquire().then( ( releaser ) => {
-            semaphore.acquire().then( ok );
+            semaphore.acquire().then( () => ok() );
             setTimeout( releaser as any, 10 );
         } );
     }, 50 );

@@ -15,7 +15,7 @@ semaphore.acquire().then( ( release ) => {
 This library can be used in **TypeScript** files as well.
 
 ```typescript
-import { Semaphore } from 'semaphore-promise';
+import Semaphore from 'semaphore-promise';
 ```
 
 
@@ -23,7 +23,7 @@ import { Semaphore } from 'semaphore-promise';
 
 ### `Semaphore( count : number )`
 
-Creates a new semaphore object with <count> semaphores
+Creates a new semaphore object with `count` semaphores
     
 ### `acquire() : Promise<() => void>`
 
@@ -35,3 +35,13 @@ Returns a *release* function which is needed to `release()` the semaphore again.
 
 * If a semaphore is available, acquire it and return a *release* function.
 * Else, throw an `Error`.
+
+
+## Changelog
+
+* **v1.3.0** (2022-02-10)
+  * Add default export so `import Semaphore from 'semaphore-promise'` can be used (without curly braces)
+  * Default to 1 semaphore in the constructor
+  * Docs: Add note on FIFO order
+* **v1.2.0** (2019-08-07)
+  * Add `tryAcquire()`

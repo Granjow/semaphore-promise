@@ -1,4 +1,7 @@
-.idea/
+.idea/.gitignore
+.idea/*.xml
+.idea/*.iml
+.idea/inspectionProfiles
 node_modules
 dist
 *.tgz

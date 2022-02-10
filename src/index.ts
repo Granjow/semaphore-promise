@@ -7,9 +7,9 @@ export class Semaphore {
 
     /**
      * Creates a new semaphore container.
-     * @param count Number of available semaphores
+     * @param count Number of available semaphores (default: 1)
      */
-    constructor( count : number ) {
+    constructor( count : number = 1 ) {
         this._maxSemaphores = count;
         this._currentSemaphores = new Set();
         this._waitingCallers = [];
@@ -87,3 +87,5 @@ export class Semaphore {
     }
 
 }
+
+export default Semaphore;
