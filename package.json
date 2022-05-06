@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "jasmine",
+    "test": "jest --coverage",
     "prepack": "rm -rf dist && npm run build",
     "prepublishOnly": "npm run test"
   },
@@ -30,10 +30,22 @@
   },
   "homepage": "https://github.com/Granjow/semaphore-promise#readme",
   "devDependencies": {
-    "@types/jasmine": "^3.3.9",
+    "@types/jest": "^27.5.0",
     "@types/node": "^16.11.24",
-    "jasmine": "^3.99.0",
-    "jasmine-core": "^3.99.0",
-    "typescript": "^4.5.5"
+    "jest": "^28.1.0",
+    "typescript": "^4.6.4"
+  },
+  "jest": {
+    "clearMocks": true,
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ],
+    "roots": [
+      "dist/"
+    ],
+    "testEnvironment": "node"
   }
 }

@@ -50,6 +50,7 @@ describe( 'Semaphore tryAcquire', () => {
         const semaphore = new Semaphore( 1 );
         let releaser : Function;
         expect( () => releaser = semaphore.tryAcquire() ).not.toThrow();
+        // @ts-ignore
         releaser();
         expect( () => semaphore.tryAcquire() ).not.toThrow();
         expect( () => semaphore.tryAcquire() ).toThrow();
@@ -94,4 +95,33 @@ describe( 'Semaphore performance', () => {
         }
     }, 20000 );
 
+} );
+
+describe( 'Names', () => {
+    it( 'uses different names for different semaphores', () => {
+        const s1 = new Semaphore();
+        const s2 = new Semaphore();
+
+        expect( s1.name ).not.toBe( s2.name );
+    } );
+} );
+
+describe( 'Logging', () => {
+    it( 'logs messages', ( done ) => {
+        const reason = 'foo';
+        let semaphore : Semaphore;
+        const logger = {
+            trace: jest.fn().mockImplementationOnce( ( message : string ) => {
+                expect( message ).toContain( semaphore.name );
+                expect( message ).toContain( reason );
+            } ),
+        };
+        semaphore = new Semaphore( 1, { logger } );
+
+        semaphore.acquire( 'foo' )
+            .then( () => {
+                expect( logger.trace ).toHaveBeenCalled();
+                done();
+            } );
+    } );
 } );

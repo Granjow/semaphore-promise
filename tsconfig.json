@@ -9,6 +9,7 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "target": "ES6",
+    "strict": true,
     "lib": [
      "es2018"
     ]

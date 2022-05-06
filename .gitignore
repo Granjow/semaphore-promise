@@ -2,6 +2,7 @@
 .idea/*.xml
 .idea/*.iml
 .idea/inspectionProfiles
+coverage
 node_modules
 dist
 *.tgz

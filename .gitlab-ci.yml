@@ -1,6 +1,16 @@
-test:
+test:node10:
   stage: test
   image: node:10
+  tags:
+    - linux
+  script:
+    - npm install
+    - npm run build
+    - npm run test
+
+test:node16:
+  stage: test
+  image: node:16
   tags:
     - linux
   script:

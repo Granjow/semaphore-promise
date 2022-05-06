@@ -39,6 +39,9 @@ Returns a *release* function which is needed to `release()` the semaphore again.
 
 ## Changelog
 
+* **v1.4.0** (2022-05-06)
+  * Add logging capabilities to simplify debugging issues like deadlocks.
+  * Add names to semaphore, also for debugging.
 * **v1.3.0** (2022-02-10)
   * Add default export so `import Semaphore from 'semaphore-promise'` can be used (without curly braces)
   * Default to 1 semaphore in the constructor
