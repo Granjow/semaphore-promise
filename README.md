@@ -21,9 +21,15 @@ import Semaphore from 'semaphore-promise';
 
 ## API
 
-### `Semaphore( count : number )`
+### `Semaphore( count : number, opts? : opts )`
 
-Creates a new semaphore object with `count` semaphores
+Creates a new semaphore object with `count` semaphores.
+
+`opts` can contain …
+
+* a `name` for the semaphore which is used by the logger.
+* a `logger` like [pino](https://www.npmjs.com/package/pino) to log debug messages.
+  If no logger is provided, nothing is logged.
     
 ### `acquire() : Promise<() => void>`
 
