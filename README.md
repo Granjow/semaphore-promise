@@ -45,6 +45,8 @@ Returns a *release* function which is needed to `release()` the semaphore again.
 
 ## Changelog
 
+* Upcoming
+  * Options in SemaphoreOptions now have source code comments in the generated .d.ts file
 * **v1.4.0** (2022-05-06)
   * Add logging capabilities to simplify debugging issues like deadlocks.
   * Add names to semaphore, also for debugging.

@@ -1,10 +1,10 @@
 let semaphoreNumber = 0;
 
 export interface SemaphoreOptions {
-    // Semaphore name; if not given, a name is assigned automatically
+    /** Semaphore name; if not given, a name is assigned automatically */
     name? : string;
 
-    // Logger to print debugging messages
+    /** Logger to print debugging messages */
     logger? : {
         trace( ...args : any ) : void;
     },
