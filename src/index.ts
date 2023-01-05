@@ -38,11 +38,16 @@ export class Semaphore {
         this._waitingCallers = [];
     }
 
-    tryAcquire(reason?:string) : () => void {
+    /**
+     * Try to immediately acquire a new semaphore.
+     * If a semaphore is free, it is returned. If no semaphore is free, an error is thrown.
+     * @param reason Reason for acquiring this semaphore, for logging purposes
+     */
+    tryAcquire( reason? : string ) : () => void {
         const semaphoreId = this.nextSemaphoreId();
         this._logger?.trace( `Trying acquire for semaphore ${this._loggedName} #${semaphoreId}${reason ? ` (reason: ${reason})` : ''} …` );
         if ( this.hasAvailableSemaphores ) {
-            this._logger?.trace(`tryAcquire() successful for semaphore ${this._loggedName} #${semaphoreId}`);
+            this._logger?.trace( `tryAcquire() successful for semaphore ${this._loggedName} #${semaphoreId}` );
             this._currentSemaphores.add( semaphoreId );
             return this.createReleaseFunction( semaphoreId );
         } else {
@@ -54,6 +59,7 @@ export class Semaphore {
      * Acquire a new semaphore.
      * The returned promise resolves as soon as a semaphore is available and returns a function `release`
      * which has to be used to release the acquired promise.
+     * @param reason Reason for acquiring this semaphore, for logging purposes
      * @return {Promise<Function>}
      */
     acquire( reason? : string ) : Promise<() => void> {
@@ -115,7 +121,7 @@ export class Semaphore {
         this._logger?.trace( `Checking for free semaphore ${this._loggedName}: ${this._waitingCallers.length} waiting` );
         while ( this._waitingCallers.length > 0 && this.hasAvailableSemaphores ) {
             const caller = this._waitingCallers.shift();
-            if (caller !== undefined) {
+            if ( caller !== undefined ) {
                 this._logger?.trace( `Free semaphore ${this._loggedName} found, assigning.` );
                 const semaphoreId = caller();
                 this._currentSemaphores.add( semaphoreId );
