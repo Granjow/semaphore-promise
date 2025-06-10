@@ -15,7 +15,7 @@ semaphore.acquire().then( ( release ) => {
 This library can be used in **TypeScript** files as well.
 
 ```typescript
-import Semaphore from 'semaphore-promise';
+import { Semaphore } from 'semaphore-promise';
 ```
 
 
@@ -45,6 +45,8 @@ Returns a *release* function which is needed to `release()` the semaphore again.
 
 ## Changelog
 
+* **v1.4.3** (2025-06-10)
+  * Dev dependencies updated
 * **v1.4.2** (2023-07-09)
   * Options in SemaphoreOptions now have source code comments in the generated .d.ts file
   * `tryAcquire` is now documented

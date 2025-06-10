@@ -4,6 +4,8 @@
     "noImplicitAny": true,
     "removeComments": false,
     "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "inlineSources": true,
     "declaration": true,

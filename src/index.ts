@@ -10,6 +10,20 @@ export interface SemaphoreOptions {
     },
 }
 
+/**
+ * A Semaphore is an object used for multi-threading and asynchronous code.
+ * For example:
+ *
+ * - An async function sends and receives on a bus. Because it is async,
+ *   one can start it multiple times, but the second call has to wait sending
+ *   until the first call finished receiving.
+ *
+ * The Semaphore is then taken when the first call enters the critical section
+ * and returned by the first call after it has received data.
+ *
+ * The second call either finds a Semaphore available because it has already
+ * been returned, or it has to wait for it to be available.
+ */
 export class Semaphore {
 
     public readonly name : string;
