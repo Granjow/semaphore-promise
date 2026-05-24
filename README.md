@@ -45,6 +45,8 @@ Returns a *release* function which is needed to `release()` the semaphore again.
 
 ## Changelog
 
+* **v1.4.4** (2026-05-24)
+  * Dev dependencies updated
 * **v1.4.3** (2025-06-10)
   * Dev dependencies updated
 * **v1.4.2** (2023-07-09)

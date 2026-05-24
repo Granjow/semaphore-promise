@@ -1,6 +1,6 @@
-test:node12:
+test:node22:
   stage: test
-  image: node:12
+  image: node:22
   tags:
     - linux
   script:
@@ -8,9 +8,9 @@ test:node12:
     - npm run build
     - npm run test
 
-test:node16:
+test:node18:
   stage: test
-  image: node:16
+  image: node:18
   tags:
     - linux
   script:
